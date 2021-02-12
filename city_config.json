@@ -1,0 +1,58 @@
+[
+    {
+        "name": "San Francisco",
+        "latitude": 37.779379,
+        "longitude": -122.418433,
+        "lights": [
+            "Lego_San_Francisco_Lights"
+        ]
+    },
+    {
+        "name": "Las Vegas",
+        "latitude": 36.1667469,
+        "longitude": -115.1487083,
+        "lights": [
+            "Lego_Las_Vegas_Lights"
+        ]
+    },
+    {
+        "name": "New York",
+        "latitude": 40.7130125,
+        "longitude": -74.0071296,
+        "lights": [
+            "Lego_New_York_Lights"
+        ]
+    },
+    {
+        "name": "London",
+        "latitude": 51.5001524,
+        "longitude": -0.1262362,
+        "lights": [
+            "Lego_London_Lights"
+        ]
+    },
+    {
+        "name": "Paris",
+        "latitude": 48.8566419,
+        "longitude": 2.3518481,
+        "lights": [
+            "Lego_Paris_Lights1"
+        ]
+    },
+    {
+        "name": "Sydney",
+        "latitude": -33.8727139,
+        "longitude": 151.2058666,
+        "lights": [
+            "Lego_Sydney_Lights"
+        ]
+    },
+    {
+        "name": "Tokyo",
+        "latitude": 35.689506,
+        "longitude": 139.6917,
+        "lights": [
+            "Lego_Tokyo_Lights"
+        ]
+    }
+]
