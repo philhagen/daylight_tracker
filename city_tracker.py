@@ -2,7 +2,7 @@
 # (C)2021 Phil Hagen <phil@lewestech.com>
 #
 # This script will read a list of records in JSON format that describe one location each.
-# It will then determine the sunset and sunrise times for each location and creat an "at" job at each of those events.
+# It will then determine the sunset and sunrise times for each location and create an "at" job at each of those events.
 #
 # All clocks are assumed UTC because if they are not, they are wrong.
 
