@@ -6,7 +6,6 @@
 import json
 import requests
 import argparse
-import pdb
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-a', '--accessory', help="Accessory name to set")

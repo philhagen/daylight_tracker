@@ -15,10 +15,10 @@ import datetime
 import sys
 import argparse
 
-# if (sys.version_info.major + (sys.version_info.minor * .1)) < 3.7:
-#     # these 3 lines are needed for python <3.7
-#     from backports.datetime_fromisoformat import MonkeyPatch
-#     MonkeyPatch.patch_fromisoformat()
+if (sys.version_info.major + (sys.version_info.minor * .1)) < 3.7:
+    # these 3 lines are needed for python <3.7
+    from backports.datetime_fromisoformat import MonkeyPatch
+    MonkeyPatch.patch_fromisoformat()
 
 default_log = '/var/log/city_tracker.log'
 
@@ -56,7 +56,6 @@ for city in cities:
     city_name = city['name']
     latitude = city['latitude']
     longitude = city['longitude']
-    lights = city['lights']
 
     # url for the sunrise/sunset API, including the latitude and longitude
     city_sun_url_today = 'https://api.sunrise-sunset.org/json?lat=%f&lng=%f&formatted=0' % (latitude, longitude)
@@ -97,31 +96,30 @@ for city in cities:
             sunset = sunset_tomorrow
             time_to_sunset = sunset_tomorrow - current_time
 
-    for light in lights:
-        if args.verbose:
-            print('%s Turning %s:%s on at %s (%d min) and off at %s (%d min)' % (logtime, city_name, light, sunset.isoformat(), int(time_to_sunset.total_seconds()/60), sunrise.isoformat(), int(time_to_sunrise.total_seconds()/60)))
+    if args.verbose:
+        print('%s Turning %s on at %s (%d min) and off at %s (%d min)' % (logtime, city_name, sunset.isoformat(), int(time_to_sunset.total_seconds()/60), sunrise.isoformat(), int(time_to_sunrise.total_seconds()/60)))
 
-        if args.log:
-            logfile.write('%s %s:%s Turning on at %s and off at %s\n' % (logtime, city_name, light, sunset.isoformat(), sunrise.isoformat()))
+    if args.log:
+        logfile.write('%s %s Turning on at %s and off at %s\n' % (logtime, city_name, sunset.isoformat(), sunrise.isoformat()))
 
-        # if not in test mode, create the at jobs
-        if not args.test:
-            # create temp file for sunrise, write the poweroff command to it, seek to byte offset 0
-            fh1 = tempfile.TemporaryFile()
-            fh1.write(bytes('hoobs_power.py -a "Lego %s" -p on' % (light), 'utf-8'))
-            fh1.seek(0)
-            # create temp file for sunset, write the poweron command to it, seek to byte offset 0
-            fh2 = tempfile.TemporaryFile()
-            fh2.write(bytes('hoobs_power.py -a "Lego %s" -p off' % (light), 'utf-8'))
-            fh2.seek(0)
+    # if not in test mode, create the at jobs
+    if not args.test:
+        # create temp file for sunrise, write the poweroff command to it, seek to byte offset 0
+        fh1 = tempfile.TemporaryFile()
+        fh1.write(bytes('hoobs_power.py -a "Lego %s" -p on' % (city_name), 'utf-8'))
+        fh1.seek(0)
+        # create temp file for sunset, write the poweron command to it, seek to byte offset 0
+        fh2 = tempfile.TemporaryFile()
+        fh2.write(bytes('hoobs_power.py -a "Lego %s" -p off' % (city_name), 'utf-8'))
+        fh2.seek(0)
 
-            # run the "at" job creations for each of the poweron and poweroff commands
-            subprocess.run(['at', '-M', 'now', '+', str(int(time_to_sunrise.total_seconds()/60)), 'minutes'], stdin=fh1, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            subprocess.run(['at', '-M', 'now', '+', str(int(time_to_sunset.total_seconds()/60)), 'minutes'], stdin=fh2, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        # run the "at" job creations for each of the poweron and poweroff commands
+        subprocess.run(['at', '-M', 'now', '+', str(int(time_to_sunrise.total_seconds()/60)), 'minutes'], stdin=fh1, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(['at', '-M', 'now', '+', str(int(time_to_sunset.total_seconds()/60)), 'minutes'], stdin=fh2, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-            # close the temp files
-            fh1.close()
-            fh2.close()
+        # close the temp files
+        fh1.close()
+        fh2.close()
 
 # if in log mode, close the log file
 if args.log:
