@@ -34,7 +34,7 @@ if args.test:
     args.log = False
 
 # load a JSON-formatted list of cities and their respective latitudes and longitudes
-cf = open('/etc/sysconfig/city_config.json', 'r')
+cf = open('/etc/sysconfig/daylight_tracker_config.json', 'r')
 cities = json.load(cf)['cities']
 cf.close()
 

@@ -14,7 +14,7 @@ parser.add_argument('-p', '--powermode', help="Power state to set", choices=['on
 args = parser.parse_args()
 
 # load hoobs configuration from file
-cf = open('/etc/sysconfig/city_config.json', 'r')
+cf = open('/etc/sysconfig/daylight_tracker_config.json', 'r')
 hoobs = json.load(cf)['hoobs']
 cf.close()
 
