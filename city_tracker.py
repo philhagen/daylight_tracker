@@ -106,11 +106,11 @@ for city in cities:
     if not args.test:
         # create temp file for sunrise, write the poweroff command to it, seek to byte offset 0
         fh1 = tempfile.TemporaryFile()
-        fh1.write(bytes('hoobs_power.py -a "Lego %s" -p on' % (city_name), 'utf-8'))
+        fh1.write(bytes('hoobs_power.py -a "Lego %s" -p off' % (city_name), 'utf-8'))
         fh1.seek(0)
         # create temp file for sunset, write the poweron command to it, seek to byte offset 0
         fh2 = tempfile.TemporaryFile()
-        fh2.write(bytes('hoobs_power.py -a "Lego %s" -p off' % (city_name), 'utf-8'))
+        fh2.write(bytes('hoobs_power.py -a "Lego %s" -p on' % (city_name), 'utf-8'))
         fh2.seek(0)
 
         # run the "at" job creations for each of the poweron and poweroff commands
