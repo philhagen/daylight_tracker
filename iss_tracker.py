@@ -72,7 +72,7 @@ for i in range(0,run_every):
 
             if not args.test:
                 fh = tempfile.TemporaryFile()
-                fh.write(bytes('hoobs_power.py -a "Lego ISS" -p on', 'utf-8'))
+                fh.write(bytes('/usr/local/bin/hoobs_power.py -a "Lego ISS" -p on', 'utf-8'))
                 fh.seek(0)
 
                 subprocess.run(['at', '-M', 'now', '+', str(i+1), 'minutes'], stdin=fh, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -88,7 +88,7 @@ for i in range(0,run_every):
 
             if not args.test:
                 fh = tempfile.TemporaryFile()
-                fh.write(bytes('hoobs_power.py -a "Lego ISS" -p off', 'utf-8'))
+                fh.write(bytes('/usr/local/bin/hoobs_power.py -a "Lego ISS" -p off', 'utf-8'))
                 fh.seek(0)
 
                 subprocess.run(['at', '-M', 'now', '+', str(i+1), 'minutes'], stdin=fh, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
