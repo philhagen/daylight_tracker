@@ -4,7 +4,7 @@
         "username": "xxxxx",
         "password": "yyyyy"
     },
-    "lights": [
+    "cities": [
         {
             "name": "San Francisco",
             "latitude": 37.779379,
