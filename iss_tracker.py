@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# (C)2021 Phil Hagen <phil@lewestech.com>
+# (C)2026 Phil Hagen <phil@lewestech.com>
 #
 # This script will read determine the next seven minutes of the ISS's location, to include whether the ISS is in daylight or shadow.
 # It will then create an "at" job for the minute when the ISS enters or exits the shadow.

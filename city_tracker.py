@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# (C)2022 Phil Hagen <phil@lewestech.com>
+# (C)2026 Phil Hagen <phil@lewestech.com>
 #
 # This script will read a list of records in JSON format that describe one location each.
 # It will then determine the sunset and sunrise times for each location and create an "at" job at each of those events.
@@ -34,7 +34,7 @@ if args.test:
     args.log = False
 
 # load a JSON-formatted list of cities and their respective latitudes and longitudes
-cf = open('/etc/sysconfig/daylight_tracker_config.json', 'r')
+cf = open('/etc/default/daylight_tracker_config.json', 'r')
 cities = json.load(cf)['cities']
 cf.close()
 

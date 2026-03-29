@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# (C)2022 Phil Hagen <phil@lewestech.com>
+# (C)2026 Phil Hagen <phil@lewestech.com>
 #
 # This script will power on or off a named light via the HOOBS API
 
@@ -13,7 +13,7 @@ parser.add_argument('-p', '--powermode', help="Power state to set", choices=['on
 args = parser.parse_args()
 
 # load hoobs configuration from file
-cf = open('/etc/sysconfig/daylight_tracker_config.json', 'r')
+cf = open('/etc/default/daylight_tracker_config.json', 'r')
 hoobs = json.load(cf)['hoobs']
 cf.close()
 
