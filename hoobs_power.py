@@ -25,6 +25,9 @@ request_headers = { 'user-agent': 'Daylight Tracker', 'content-type': 'applicati
 login_params = { 'username': hoobs['username'], 'password': hoobs['password'], 'remember': False }
 response = requests.post('http://%s/api/auth/logon' % (hoobs['hostname']), json=login_params, headers=request_headers)
 token = response.json()['token']
+if token == False:
+    print('Login Failed')
+    sys.exit(2)
 
 # set token in authorization: header from here on out
 request_headers['authorization'] = token
